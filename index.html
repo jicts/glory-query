@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>技職榮耀查詢系統</title>
+</head>
+<body>
+  <h1>查詢姓名</h1>
+  <input type="text" id="nameInput" placeholder="輸入姓名">
+  <button onclick="search()">查詢</button>
+  <div id="result"></div>
+
+  <script>
+    async function search() {
+      const name = document.getElementById("nameInput").value;
+      const res = await fetch(`https://script.google.com/macros/s/AKfycbwknUUJ_nMaDMbRtbeMKXzzklLekaKWvsTTBzTKpYgM/exec?name=${encodeURIComponent(name)}`);
+      const data = await res.json();
+
+      const resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = "";
+
+      if (data.length === 0) {
+        resultDiv.innerHTML = "<p>查無資料</p>";
+        return;
+      }
+
+      data.forEach(entry => {
+        const section = document.createElement("div");
+        section.innerHTML = `
+          <h3>工作表：${entry.sheet}</h3>
+          <p><strong>標題列1：</strong> ${entry.header1.join(" | ")}</p>
+          <p><strong>標題列2：</strong> ${entry.header2.join(" | ")}</p>
+          <p><strong>資料列：</strong> ${entry.match.join(" | ")}</p>
+          <hr/>
+        `;
+        resultDiv.appendChild(section);
+      });
+    }
+  </script>
+</body>
+</html>
