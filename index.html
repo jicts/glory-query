@@ -13,7 +13,7 @@
   <script>
     async function search() {
       const name = document.getElementById("nameInput").value;
-      const res = await fetch(`https://script.google.com/macros/s/AKfycbwknUUJ_nMaDMbRtbeMKXzzklLekaKWvsTTBzTKpYgM/exec?name=${encodeURIComponent(name)}`);
+      const res = await fetch(`https://script.google.com/macros/s/AKfycby4Fwythga47W7vGBQezaGyiaVn84APFBEW_Rwt9GzwB43T1jBPXO_ve4Jhd5yYGsRMNA/exec?name=${encodeURIComponent(name)}`);
       const data = await res.json();
 
       const resultDiv = document.getElementById("result");
@@ -36,6 +36,9 @@
         resultDiv.appendChild(section);
       });
     }
+  </script>
+</body>
+</html>
   </script>
 </body>
 </html>
