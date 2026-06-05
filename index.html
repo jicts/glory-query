@@ -1,44 +1,436 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <title>2026新北雙語榮耀表揚活動查詢系統</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2026新北市雙語榮耀表揚活動座位查詢系統</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+      background: #f4f7fb;
+      color: #1f2937;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #0f4c81, #2563eb);
+      color: white;
+      padding: 30px 18px 26px;
+      text-align: center;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.45;
+      letter-spacing: 0.5px;
+    }
+
+    .header p {
+      margin: 10px 0 0;
+      font-size: 16px;
+      opacity: 0.95;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      margin-bottom: 18px;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 10px;
+    }
+
+    input {
+      flex: 1;
+      padding: 15px 16px;
+      font-size: 18px;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+    }
+
+    button {
+      padding: 14px 22px;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+      font-weight: 700;
+      min-width: 96px;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .hint {
+      margin-top: 14px;
+      color: #64748b;
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .quick-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .quick-buttons button {
+      min-width: auto;
+      padding: 8px 12px;
+      font-size: 14px;
+      background: #e0ecff;
+      color: #1e40af;
+    }
+
+    .quick-buttons button:hover {
+      background: #bfdbfe;
+    }
+
+    .status {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .warning {
+      background: #fff7ed;
+      color: #c2410c;
+      padding: 12px 14px;
+      border-radius: 12px;
+      margin-bottom: 14px;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+
+    .result-item {
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 16px;
+      background: #ffffff;
+    }
+
+    .sheet-name {
+      font-size: 18px;
+      font-weight: 800;
+      color: #1d4ed8;
+      margin-bottom: 12px;
+      line-height: 1.7;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1e40af;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 13px;
+      margin: 3px 4px 3px 0;
+      vertical-align: middle;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+    }
+
+    td {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 10px;
+      font-size: 15px;
+      vertical-align: top;
+      white-space: nowrap;
+    }
+
+    tr:nth-child(1) {
+      background: #eff6ff;
+      font-weight: 700;
+    }
+
+    tr:nth-child(2) {
+      background: #f8fafc;
+      font-weight: 700;
+    }
+
+    tr:nth-child(3) {
+      background: #ffffff;
+    }
+
+    mark {
+      background: #fef08a;
+      color: #111827;
+      padding: 1px 2px;
+      border-radius: 3px;
+    }
+
+    .no-data {
+      text-align: center;
+      color: #64748b;
+      font-size: 18px;
+      padding: 26px;
+      line-height: 1.8;
+    }
+
+    .footer {
+      text-align: center;
+      color: #64748b;
+      font-size: 14px;
+      margin: 24px 0;
+      line-height: 1.8;
+    }
+
+    .small {
+      font-size: 13px;
+      color: #64748b;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 600px) {
+      .header h1 {
+        font-size: 23px;
+      }
+
+      .header p {
+        font-size: 14px;
+      }
+
+      .container {
+        margin-top: 16px;
+        padding: 0 12px;
+      }
+
+      .card {
+        padding: 18px;
+        border-radius: 16px;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+
+      input, button {
+        width: 100%;
+        font-size: 17px;
+      }
+
+      table {
+        min-width: 640px;
+      }
+
+      td {
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>2025新北雙語榮耀表揚活動</h1>
-  <input type="text" id="nameInput" placeholder="請輸入您的姓名">
-  <button onclick="search()">查詢</button>
-  <div id="result"></div>
+  <div class="header">
+    <h1>2026新北市雙語榮耀表揚活動<br>座位查詢系統</h1>
+    <p>可輸入姓名、學校名稱、獎項或座位號碼查詢</p>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <div class="search-box">
+        <input
+          type="text"
+          id="keywordInput"
+          placeholder="請輸入姓名、學校或座位，例如：蔡妤喬、樟樹、E12"
+          autocomplete="off"
+          onkeydown="if(event.key === 'Enter') searchData();"
+        />
+        <button onclick="searchData()">查詢</button>
+      </div>
+
+      <div class="quick-buttons">
+        <button onclick="setPlaceholder('請輸入姓名')">姓名查詢</button>
+        <button onclick="setPlaceholder('請輸入學校名稱')">學校查詢</button>
+        <button onclick="setPlaceholder('請輸入座位號碼')">座位查詢</button>
+        <button onclick="clearSearch()">清除</button>
+      </div>
+
+      <div class="hint">
+        查詢說明：<br>
+        1. 可輸入完整姓名，也可以只輸入部分文字進行模糊搜尋。<br>
+        2. 可輸入學校名稱，查詢該校所有相關名單。<br>
+        3. 若同一人或同一學校出現在多個工作表，系統會全部列出。<br>
+        4. 手機使用時，可左右滑動表格查看完整資料。
+      </div>
+    </div>
+
+    <div id="resultArea"></div>
+
+    <div class="footer">
+      新北市雙語榮耀表揚活動座位查詢系統<br>
+      <span class="small">查詢網址：https://jicts.github.io/glory-query/</span>
+    </div>
+  </div>
 
   <script>
-    async function search() {
-      const name = document.getElementById("nameInput").value;
-      const res = await fetch(`https://script.google.com/macros/s/AKfycbziDFFiIamUq2_Wh3_9JG6l9U1JXdZJMQpDZpIFw0-koAvn0BxP27RmCdFuwnQAyrbl/exec`);
-      const data = await res.json();
+    const API_URL = "https://script.google.com/macros/s/AKfycbziDFFiIamUq2_Wh3_9JG6l9U1JXdZJMQpDZpIFw0-koAvn0BxP27RmCdFuwnQAyrbl/exec";
 
-      const resultDiv = document.getElementById("result");
-      resultDiv.innerHTML = "";
+    function jsonp(url) {
+      return new Promise((resolve, reject) => {
+        const callbackName = "jsonpCallback_" + Date.now();
+        const script = document.createElement("script");
 
-      if (data.length === 0) {
-        resultDiv.innerHTML = "<p>查無資料</p>";
+        window[callbackName] = function(data) {
+          resolve(data);
+          delete window[callbackName];
+          if (script.parentNode) {
+            document.body.removeChild(script);
+          }
+        };
+
+        script.onerror = function() {
+          reject(new Error("查詢失敗，請確認 Apps Script 是否已部署為「任何人」可存取。"));
+          delete window[callbackName];
+          if (script.parentNode) {
+            document.body.removeChild(script);
+          }
+        };
+
+        script.src = url + "&callback=" + callbackName;
+        document.body.appendChild(script);
+      });
+    }
+
+    async function searchData() {
+      const keyword = document.getElementById("keywordInput").value.trim();
+      const resultArea = document.getElementById("resultArea");
+
+      if (!keyword) {
+        resultArea.innerHTML = `<div class="card no-data">請先輸入查詢關鍵字</div>`;
         return;
       }
 
-      data.forEach(entry => {
-        const section = document.createElement("div");
-        section.innerHTML = `
-          <h3>工作表：${entry.sheet}</h3>
-          <p><strong>標題列1：</strong> ${entry.header1.join(" | ")}</p>
-          <p><strong>標題列2：</strong> ${entry.header2.join(" | ")}</p>
-          <p><strong>資料列：</strong> ${entry.match.join(" | ")}</p>
-          <hr/>
+      resultArea.innerHTML = `<div class="card no-data">查詢中，請稍候...</div>`;
+
+      try {
+        const url = API_URL + "?q=" + encodeURIComponent(keyword);
+        const data = await jsonp(url);
+
+        if (!data.success || data.count === 0) {
+          resultArea.innerHTML = `
+            <div class="card no-data">
+              查無資料：${escapeHtml(keyword)}<br>
+              <span class="small">請確認姓名、學校名稱或座位號碼是否輸入正確。</span>
+            </div>
+          `;
+          return;
+        }
+
+        let html = `
+          <div class="card">
+            <div class="status">
+              查詢「${escapeHtml(keyword)}」共找到 ${data.count} 筆資料
+            </div>
         `;
-        resultDiv.appendChild(section);
-      });
+
+        if (data.count > 1) {
+          html += `
+            <div class="warning">
+              ⚠️ 多筆／重複資料提醒：系統找到 ${data.count} 筆符合資料，請確認工作表、獎項與座位資訊。
+            </div>
+          `;
+        }
+
+        html += `</div>`;
+
+        data.results.forEach((item, index) => {
+          html += `
+            <div class="result-item">
+              <div class="sheet-name">
+                第 ${index + 1} 筆
+                <span class="tag">工作表：${escapeHtml(item.sheet)}</span>
+                <span class="tag">第 ${item.rowNumber} 列</span>
+              </div>
+
+              <div class="table-wrap">
+                <table>
+                  <tr>${item.header1.map(cell => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>
+                  <tr>${item.header2.map(cell => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>
+                  <tr>${item.match.map(cell => `<td>${highlightKeyword(escapeHtml(cell), keyword)}</td>`).join("")}</tr>
+                </table>
+              </div>
+            </div>
+          `;
+        });
+
+        resultArea.innerHTML = html;
+
+      } catch (error) {
+        resultArea.innerHTML = `
+          <div class="card no-data">
+            查詢失敗，請確認 Apps Script 部署權限是否設為「任何人」。<br><br>
+            錯誤訊息：${escapeHtml(error.message)}
+          </div>
+        `;
+      }
     }
-  </script>
-</body>
-</html>
+
+    function setPlaceholder(text) {
+      const input = document.getElementById("keywordInput");
+      input.placeholder = text;
+      input.focus();
+    }
+
+    function clearSearch() {
+      document.getElementById("keywordInput").value = "";
+      document.getElementById("resultArea").innerHTML = "";
+      document.getElementById("keywordInput").focus();
+    }
+
+    function escapeHtml(text) {
+      if (text === null || text === undefined) return "";
+      return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function highlightKeyword(text, keyword) {
+      const safeKeyword = escapeHtml(keyword);
+      if (!safeKeyword) return text;
+      return text.replaceAll(safeKeyword, `<mark>${safeKeyword}</mark>`);
+    }
   </script>
 </body>
 </html>
