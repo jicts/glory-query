@@ -4,43 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2026新北市雙語榮耀表揚活動座位查詢系統</title>
-
   <style>
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
       background: #f4f7fb;
       color: #1f2937;
     }
-
     .header {
       background: linear-gradient(135deg, #0f4c81, #2563eb);
       color: white;
       padding: 30px 18px 26px;
       text-align: center;
     }
-
     .header h1 {
       margin: 0;
       font-size: 28px;
       line-height: 1.45;
       letter-spacing: 0.5px;
     }
-
-    .header p {
-      margin: 10px 0 0;
-      font-size: 16px;
-      opacity: 0.95;
-    }
-
-    .container {
-      max-width: 960px;
-      margin: 24px auto;
-      padding: 0 16px;
-    }
-
+    .header p { margin: 10px 0 0; font-size: 16px; opacity: 0.95; }
+    .container { max-width: 960px; margin: 24px auto; padding: 0 16px; }
     .card {
       background: white;
       border-radius: 18px;
@@ -48,12 +33,7 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.08);
       margin-bottom: 18px;
     }
-
-    .search-box {
-      display: flex;
-      gap: 10px;
-    }
-
+    .search-box { display: flex; gap: 10px; }
     input {
       flex: 1;
       padding: 15px 16px;
@@ -62,12 +42,10 @@
       border-radius: 12px;
       outline: none;
     }
-
     input:focus {
       border-color: #2563eb;
       box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
     }
-
     button {
       padding: 14px 22px;
       font-size: 18px;
@@ -79,16 +57,8 @@
       font-weight: 700;
       min-width: 96px;
     }
-
     button:hover { background: #1d4ed8; }
-
-    .quick-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 14px;
-    }
-
+    .quick-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
     .quick-buttons button {
       min-width: auto;
       padding: 8px 12px;
@@ -96,22 +66,9 @@
       background: #e0ecff;
       color: #1e40af;
     }
-
     .quick-buttons button:hover { background: #bfdbfe; }
-
-    .hint {
-      margin-top: 14px;
-      color: #64748b;
-      font-size: 15px;
-      line-height: 1.75;
-    }
-
-    .status {
-      font-size: 18px;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-
+    .hint { margin-top: 14px; color: #64748b; font-size: 15px; line-height: 1.75; }
+    .status { font-size: 18px; font-weight: 800; margin-bottom: 12px; }
     .warning {
       background: #fff7ed;
       color: #c2410c;
@@ -121,7 +78,6 @@
       font-weight: 700;
       line-height: 1.6;
     }
-
     .result-item {
       border: 1px solid #e2e8f0;
       border-radius: 18px;
@@ -130,7 +86,6 @@
       background: #ffffff;
       box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
     }
-
     .result-title {
       font-size: 16px;
       font-weight: 800;
@@ -138,7 +93,6 @@
       margin-bottom: 14px;
       line-height: 1.7;
     }
-
     .tag {
       display: inline-block;
       background: #dbeafe;
@@ -149,7 +103,6 @@
       margin: 3px 4px 3px 0;
       vertical-align: middle;
     }
-
     .main-result {
       display: flex;
       align-items: center;
@@ -160,7 +113,6 @@
       padding: 18px;
       flex-wrap: wrap;
     }
-
     .seat-highlight {
       display: inline-block;
       background: #dc2626;
@@ -173,28 +125,12 @@
       letter-spacing: 0.5px;
       min-width: 72px;
       text-align: center;
+      white-space: nowrap;
     }
-
     .person-block { line-height: 1.7; }
-
-    .person-name {
-      font-size: 24px;
-      font-weight: 900;
-      color: #111827;
-    }
-
-    .school-name {
-      font-size: 18px;
-      font-weight: 800;
-      color: #334155;
-    }
-
-    .award-name {
-      font-size: 16px;
-      color: #475569;
-      white-space: pre-line;
-    }
-
+    .person-name { font-size: 24px; font-weight: 900; color: #111827; }
+    .school-name { font-size: 18px; font-weight: 800; color: #334155; }
+    .award-name { font-size: 16px; color: #475569; white-space: pre-line; }
     mark {
       background: #fef08a;
       color: #111827;
@@ -202,14 +138,12 @@
       border-radius: 4px;
       font-weight: 900;
     }
-
     .detail-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
       margin-top: 14px;
     }
-
     .detail-item {
       background: #ffffff;
       border: 1px solid #e5e7eb;
@@ -217,12 +151,7 @@
       padding: 10px 12px;
       line-height: 1.6;
     }
-
-    .detail-label {
-      color: #64748b;
-      font-size: 13px;
-    }
-
+    .detail-label { color: #64748b; font-size: 13px; }
     .detail-value {
       color: #111827;
       font-size: 15px;
@@ -230,7 +159,6 @@
       word-break: break-word;
       white-space: pre-line;
     }
-
     .no-data {
       text-align: center;
       color: #64748b;
@@ -238,7 +166,6 @@
       padding: 26px;
       line-height: 1.8;
     }
-
     .footer {
       text-align: center;
       color: #64748b;
@@ -246,13 +173,7 @@
       margin: 24px 0;
       line-height: 1.8;
     }
-
-    .small {
-      font-size: 13px;
-      color: #64748b;
-      line-height: 1.7;
-    }
-
+    .small { font-size: 13px; color: #64748b; line-height: 1.7; }
     @media (max-width: 600px) {
       .header h1 { font-size: 23px; }
       .header p { font-size: 14px; }
@@ -267,7 +188,6 @@
     }
   </style>
 </head>
-
 <body>
   <div class="header">
     <h1>2026新北市雙語榮耀表揚活動<br>座位查詢系統</h1>
@@ -280,7 +200,7 @@
         <input
           type="text"
           id="keywordInput"
-          placeholder="請輸入姓名、學校、獎項或座位，例如：陳浩然、樟樹、冠軍、I 41"
+          placeholder="請輸入姓名、學校、獎項或座位，例如：王小明、樟樹、冠軍、I 41"
           autocomplete="off"
           onkeydown="if(event.key === 'Enter') searchData();"
         />
