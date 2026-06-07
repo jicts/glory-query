@@ -4,28 +4,43 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2026新北市雙語榮耀表揚活動座位查詢系統</title>
+
   <style>
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
       background: #f4f7fb;
       color: #1f2937;
     }
+
     .header {
       background: linear-gradient(135deg, #0f4c81, #2563eb);
       color: white;
       padding: 30px 18px 26px;
       text-align: center;
     }
+
     .header h1 {
       margin: 0;
       font-size: 28px;
       line-height: 1.45;
       letter-spacing: 0.5px;
     }
-    .header p { margin: 10px 0 0; font-size: 16px; opacity: 0.95; }
-    .container { max-width: 980px; margin: 24px auto; padding: 0 16px; }
+
+    .header p {
+      margin: 10px 0 0;
+      font-size: 16px;
+      opacity: 0.95;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
     .card {
       background: white;
       border-radius: 18px;
@@ -33,7 +48,12 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.08);
       margin-bottom: 18px;
     }
-    .search-box { display: flex; gap: 10px; }
+
+    .search-box {
+      display: flex;
+      gap: 10px;
+    }
+
     input {
       flex: 1;
       padding: 15px 16px;
@@ -42,10 +62,12 @@
       border-radius: 12px;
       outline: none;
     }
+
     input:focus {
       border-color: #2563eb;
       box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
     }
+
     button {
       padding: 14px 22px;
       font-size: 18px;
@@ -57,8 +79,16 @@
       font-weight: 700;
       min-width: 96px;
     }
+
     button:hover { background: #1d4ed8; }
-    .quick-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+
+    .quick-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
     .quick-buttons button {
       min-width: auto;
       padding: 8px 12px;
@@ -66,8 +96,22 @@
       background: #e0ecff;
       color: #1e40af;
     }
-    .hint { margin-top: 14px; color: #64748b; font-size: 15px; line-height: 1.75; }
-    .status { font-size: 18px; font-weight: 800; margin-bottom: 12px; }
+
+    .quick-buttons button:hover { background: #bfdbfe; }
+
+    .hint {
+      margin-top: 14px;
+      color: #64748b;
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .status {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
     .warning {
       background: #fff7ed;
       color: #c2410c;
@@ -77,6 +121,7 @@
       font-weight: 700;
       line-height: 1.6;
     }
+
     .result-item {
       border: 1px solid #e2e8f0;
       border-radius: 18px;
@@ -85,6 +130,7 @@
       background: #ffffff;
       box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
     }
+
     .result-title {
       font-size: 16px;
       font-weight: 800;
@@ -92,6 +138,7 @@
       margin-bottom: 14px;
       line-height: 1.7;
     }
+
     .tag {
       display: inline-block;
       background: #dbeafe;
@@ -102,6 +149,7 @@
       margin: 3px 4px 3px 0;
       vertical-align: middle;
     }
+
     .main-result {
       display: flex;
       align-items: center;
@@ -112,6 +160,7 @@
       padding: 18px;
       flex-wrap: wrap;
     }
+
     .seat-highlight {
       display: inline-block;
       background: #dc2626;
@@ -122,11 +171,30 @@
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(220, 38, 38, 0.35);
       letter-spacing: 0.5px;
+      min-width: 72px;
+      text-align: center;
     }
+
     .person-block { line-height: 1.7; }
-    .person-name { font-size: 24px; font-weight: 900; color: #111827; }
-    .school-name { font-size: 18px; font-weight: 800; color: #334155; }
-    .award-name { font-size: 16px; color: #475569; }
+
+    .person-name {
+      font-size: 24px;
+      font-weight: 900;
+      color: #111827;
+    }
+
+    .school-name {
+      font-size: 18px;
+      font-weight: 800;
+      color: #334155;
+    }
+
+    .award-name {
+      font-size: 16px;
+      color: #475569;
+      white-space: pre-line;
+    }
+
     mark {
       background: #fef08a;
       color: #111827;
@@ -134,12 +202,14 @@
       border-radius: 4px;
       font-weight: 900;
     }
+
     .detail-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
       margin-top: 14px;
     }
+
     .detail-item {
       background: #ffffff;
       border: 1px solid #e5e7eb;
@@ -147,8 +217,20 @@
       padding: 10px 12px;
       line-height: 1.6;
     }
-    .detail-label { color: #64748b; font-size: 13px; }
-    .detail-value { color: #111827; font-size: 15px; font-weight: 700; word-break: break-word; }
+
+    .detail-label {
+      color: #64748b;
+      font-size: 13px;
+    }
+
+    .detail-value {
+      color: #111827;
+      font-size: 15px;
+      font-weight: 700;
+      word-break: break-word;
+      white-space: pre-line;
+    }
+
     .no-data {
       text-align: center;
       color: #64748b;
@@ -156,6 +238,7 @@
       padding: 26px;
       line-height: 1.8;
     }
+
     .footer {
       text-align: center;
       color: #64748b;
@@ -163,7 +246,13 @@
       margin: 24px 0;
       line-height: 1.8;
     }
-    .small { font-size: 13px; color: #64748b; line-height: 1.7; }
+
+    .small {
+      font-size: 13px;
+      color: #64748b;
+      line-height: 1.7;
+    }
+
     @media (max-width: 600px) {
       .header h1 { font-size: 23px; }
       .header p { font-size: 14px; }
@@ -178,10 +267,11 @@
     }
   </style>
 </head>
+
 <body>
   <div class="header">
     <h1>2026新北市雙語榮耀表揚活動<br>座位查詢系統</h1>
-    <p>可輸入姓名、學校名稱、獎項、職稱或座位號碼查詢</p>
+    <p>可輸入姓名、學校名稱、職稱／獎項或座位號碼查詢</p>
   </div>
 
   <div class="container">
@@ -190,7 +280,7 @@
         <input
           type="text"
           id="keywordInput"
-          placeholder="請輸入姓名、學校、獎項或座位，例如：陳宜蓁、樟樹、金腦獎、D1"
+          placeholder="請輸入姓名、學校、獎項或座位，例如：陳浩然、樟樹、冠軍、I 41"
           autocomplete="off"
           onkeydown="if(event.key === 'Enter') searchData();"
         />
@@ -200,17 +290,17 @@
       <div class="quick-buttons">
         <button onclick="setPlaceholder('請輸入姓名')">姓名查詢</button>
         <button onclick="setPlaceholder('請輸入學校名稱')">學校查詢</button>
-        <button onclick="setPlaceholder('請輸入獎項或職稱')">獎項／職稱查詢</button>
-        <button onclick="setPlaceholder('請輸入座位號碼')">座位查詢</button>
+        <button onclick="setPlaceholder('請輸入職稱或獎項')">職稱／獎項查詢</button>
+        <button onclick="setPlaceholder('請輸入座位號碼，例如 I 41')">座位查詢</button>
         <button onclick="clearSearch()">清除</button>
       </div>
 
       <div class="hint">
         查詢說明：<br>
-        1. 本版支援新版 Excel 結構：座位、學校、職稱、姓名、獎項分欄顯示。<br>
-        2. 查詢結果會整理成單筆卡片，不顯示整列無關資料。<br>
-        3. 若同一人、同一學校或同一獎項出現在多個工作表，系統會全部列出。<br>
-        4. 座位號碼會以紅底白字醒目標示。
+        1. 本系統以「2026新北市雙語榮耀.xlsx」作為搜尋資料庫。<br>
+        2. 資料欄位為：序號／座位、學校名稱、職稱／獎項、姓名。<br>
+        3. 可輸入部分文字進行模糊搜尋，例如輸入「樟樹」會列出相關資料。<br>
+        4. 若找到多筆資料，系統會全部列出並提醒確認。
       </div>
     </div>
 
@@ -266,39 +356,30 @@
           resultArea.innerHTML = `
             <div class="card no-data">
               查無資料：${escapeHtml(keyword)}<br>
-              <span class="small">請確認姓名、學校名稱、獎項或座位號碼是否輸入正確。</span>
+              <span class="small">請確認姓名、學校名稱、職稱／獎項或座位號碼是否輸入正確。</span>
             </div>
           `;
           return;
         }
 
-        const rows = data.results.map(item => buildStructuredItem(item, keyword));
-
         let html = `
           <div class="card">
             <div class="status">
-              查詢「${escapeHtml(keyword)}」共找到 ${rows.length} 筆資料
+              查詢「${escapeHtml(keyword)}」共找到 ${data.results.length} 筆資料
             </div>
         `;
 
-        if (rows.length > 1) {
+        if (data.results.length > 1) {
           html += `
             <div class="warning">
-              ⚠️ 多筆／重複資料提醒：系統找到 ${rows.length} 筆符合資料，請確認工作表、獎項與座位資訊。
+              ⚠️ 多筆／重複資料提醒：系統找到 ${data.results.length} 筆符合資料，請確認座位、學校與姓名。
             </div>
           `;
         }
 
         html += `</div>`;
 
-        rows.forEach((item, index) => {
-          const detailHtml = item.details.map(d => `
-            <div class="detail-item">
-              <div class="detail-label">${escapeHtml(d.label)}</div>
-              <div class="detail-value">${highlightKeyword(escapeHtml(d.value), keyword)}</div>
-            </div>
-          `).join("");
-
+        data.results.forEach((item, index) => {
           html += `
             <div class="result-item">
               <div class="result-title">
@@ -308,16 +389,31 @@
               </div>
 
               <div class="main-result">
-                ${item.seat ? `<span class="seat-highlight">${escapeHtml(item.seat)}</span>` : ""}
+                ${item.seat ? `<span class="seat-highlight">${highlightKeyword(escapeHtml(item.seat), keyword)}</span>` : ""}
                 <div class="person-block">
-                  <div class="person-name">${highlightKeyword(escapeHtml(item.name || item.mainText), keyword)}</div>
-                  ${item.school ? `<div class="school-name">${highlightKeyword(escapeHtml(item.school), keyword)}</div>` : ""}
-                  ${item.award ? `<div class="award-name">${highlightKeyword(escapeHtml(item.award), keyword)}</div>` : ""}
+                  <div class="person-name">${highlightKeyword(escapeHtml(item.name), keyword)}</div>
+                  <div class="school-name">${highlightKeyword(escapeHtml(item.school), keyword)}</div>
+                  <div class="award-name">${highlightKeyword(escapeHtml(item.titleAward), keyword)}</div>
                 </div>
               </div>
 
               <div class="detail-grid">
-                ${detailHtml}
+                <div class="detail-item">
+                  <div class="detail-label">序號／座位</div>
+                  <div class="detail-value">${highlightKeyword(escapeHtml(item.seat), keyword)}</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">學校名稱</div>
+                  <div class="detail-value">${highlightKeyword(escapeHtml(item.school), keyword)}</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">職稱／獎項</div>
+                  <div class="detail-value">${highlightKeyword(escapeHtml(item.titleAward), keyword)}</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">姓名</div>
+                  <div class="detail-value">${highlightKeyword(escapeHtml(item.name), keyword)}</div>
+                </div>
               </div>
             </div>
           `;
@@ -333,58 +429,6 @@
           </div>
         `;
       }
-    }
-
-    function buildStructuredItem(item, keyword) {
-      const headers = item.header2 || [];
-      const row = item.match || [];
-
-      function valueByHeader(patterns) {
-        for (let i = 0; i < headers.length; i++) {
-          const h = String(headers[i] || "").trim();
-          if (!h) continue;
-          if (patterns.some(p => h.includes(p))) {
-            const v = String(row[i] || "").trim();
-            if (v) return v;
-          }
-        }
-        return "";
-      }
-
-      function collectDetails() {
-        const details = [];
-        for (let i = 0; i < headers.length; i++) {
-          const label = String(headers[i] || "").trim();
-          const value = String(row[i] || "").trim();
-          if (!label || !value) continue;
-          details.push({ label, value });
-        }
-        return details;
-      }
-
-      let seat = valueByHeader(["序號", "座位"]);
-      if (!seat) {
-        seat = row.map(c => String(c || "").trim()).find(v => /^[A-Z][0-9]{1,3}$/.test(v)) || "";
-      }
-
-      const school = valueByHeader(["學校名稱", "學校", "單位名稱", "單位"]);
-      const position = valueByHeader(["職稱"]);
-      const name = valueByHeader(["姓名", "獲獎人", "指導老師", "指導教師"]);
-      const award = valueByHeader(["獎項", "競賽組別", "考科"]);
-      const matchedCell = row.map(c => String(c || "").trim()).find(v => v.includes(keyword)) || "";
-      const mainText = [school, position, name || matchedCell, award].filter(Boolean).join("　");
-
-      return {
-        sheet: item.sheet,
-        rowNumber: item.rowNumber,
-        seat,
-        school,
-        position,
-        name: name || matchedCell,
-        award: [position, award].filter(Boolean).join("　"),
-        mainText,
-        details: collectDetails()
-      };
     }
 
     function setPlaceholder(text) {
